@@ -40,7 +40,7 @@ return {
 				-- Ensure mason installs the server
 				clangd = {
 					keys = {
-						{ "<leader>ch", "<cmd>LspClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
+						{ "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
 					},
 					root_markers = {
 						"compile_commands.json",
@@ -62,7 +62,7 @@ return {
 						"clangd",
 						"--background-index",
 						"--clang-tidy",
-						"--header-insertion=iwyu",
+						"--header-insertion=never",
 						"--completion-style=detailed",
 						"--function-arg-placeholders",
 						"--fallback-style=llvm",
