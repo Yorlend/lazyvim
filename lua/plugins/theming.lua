@@ -57,6 +57,15 @@ return {
 		},
 	},
 	{
+		"rose-pine/neovim",
+		name = "rose-pine",
+		opts = {
+			styles = {
+				transparency = true,
+			},
+		},
+	},
+	{
 		"folke/tokyonight.nvim",
 		opts = {
 			transparent = true,
@@ -69,7 +78,7 @@ return {
 	{
 		"LazyVim/LazyVim",
 		opts = {
-			colorscheme = "catppuccin",
+			colorscheme = "rose-pine",
 		},
 	}
 }
