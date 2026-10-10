@@ -5,10 +5,11 @@
 vim.opt.tabstop = 4
 -- Set the number of spaces used for each step of indentation
 vim.opt.shiftwidth = 4
--- TAB key inserts an actual tab character, not spaces
-vim.opt.expandtab = false
+vim.opt.expandtab = true
 -- Automatic indentation
 vim.opt.smartindent = true
+
+vim.o.exrc = true
 
 vim.opt.list = true
 
