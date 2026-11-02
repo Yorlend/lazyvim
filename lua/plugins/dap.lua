@@ -11,7 +11,6 @@ return {
 				"theHamsta/nvim-dap-virtual-text",
 				opts = {},
 			},
-			opts = { ensure_installed = { "codelldb" } },
 		},
 
 		-- stylua: ignore
@@ -62,24 +61,17 @@ return {
 		opts = function()
 			local dap = require("dap")
 			dap.defaults.fallback.exception_breakpoints = {'raised'}
-			if not dap.adapters["codelldb"] then
-				require("dap").adapters["codelldb"] = {
-					type = "server",
-					host = "localhost",
-					port = "${port}",
-					executable = {
-						command = "codelldb",
-						args = {
-							"--port",
-							"${port}",
-						},
-					},
+			if not dap.adapters["gdb"] then
+				dap.adapters["gdb"] = {
+					type = "executable",
+					command = "gdb",
+					args = { "--interpreter=dap", "--quiet" },
 				}
 			end
 			for _, lang in ipairs({ "c", "cpp" }) do
 				dap.configurations[lang] = {
 					{
-						type = "codelldb",
+						type = "gdb",
 						request = "launch",
 						name = "Launch file",
 						program = function()
@@ -88,7 +80,7 @@ return {
 						cwd = "${workspaceFolder}",
 					},
 					{
-						type = "codelldb",
+						type = "gdb",
 						request = "attach",
 						name = "Attach to process",
 						pid = require("dap.utils").pick_process,
@@ -105,9 +97,6 @@ return {
 		opts = {
 			automatic_installation = true,
 			handlers = {},
-			ensure_installed = {
-				'codelldb'
-			},
 		},
 		-- mason-nvim-dap is loaded when nvim-dap loads
 		config = function() end,
