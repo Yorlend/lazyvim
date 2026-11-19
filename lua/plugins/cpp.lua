@@ -81,6 +81,13 @@ return {
 					cmd = { "clice", "serve" },
 					filetypes = { "c", "cpp", "cuda" },
 					root_markers = { "clice.toml", "compile_commands.json", ".git" },
+					on_init = function(client)
+						-- Request full semantic tokens to avoid potentially corrupted delta updates.
+						local provider = client.server_capabilities.semanticTokensProvider
+						if type(provider) == "table" and type(provider.full) == "table" then
+							provider.full.delta = false
+						end
+					end,
 				},
 				clangd = {
 					enabled = false,
